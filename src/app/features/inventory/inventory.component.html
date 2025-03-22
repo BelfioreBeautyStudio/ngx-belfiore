@@ -1,5 +1,6 @@
 <div class="content-container">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <h2>Inventaris</h2>
+  <table mat-table [dataSource]="(dataSource | async)!" class="mat-elevation-z8">
     <ng-container matColumnDef="barcode">
       <th mat-header-cell *matHeaderCellDef>Barcode</th>
       <td mat-cell *matCellDef="let element">{{ element.barcode }}</td>
@@ -7,22 +8,22 @@
 
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef>Categorie</th>
-      <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.categorie }}</td>
     </ng-container>
 
     <ng-container matColumnDef="productName">
       <th mat-header-cell *matHeaderCellDef>Naam</th>
-      <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.productNaam }}</td>
     </ng-container>
 
     <ng-container matColumnDef="amountInStock">
       <th mat-header-cell *matHeaderCellDef>Aantal in stock</th>
-      <td mat-cell *matCellDef="let element">{{ element.amountInStock }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.aantal }}</td>
     </ng-container>
 
     <ng-container matColumnDef="unitPrice">
       <th mat-header-cell *matHeaderCellDef>Stukprijs</th>
-      <td mat-cell *matCellDef="let element">{{ element.unitPrice }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.stukprijs }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -30,7 +31,7 @@
   </table>
 
   <div class="fab-button">
-    <button mat-fab extended>
+    <button mat-fab extended (click)="addInventoryItem()">
       <mat-icon>add</mat-icon>
       Toevoegen
     </button>

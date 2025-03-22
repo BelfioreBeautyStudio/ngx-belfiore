@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Product toevoegen</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form">
+    <div>&nbsp;</div>
+    <div>
+      <mat-form-field appearance="outline" class="width-full">
+        <mat-label>Barcode</mat-label>
+        <input formControlName="barcode" matInput required />
+        <mat-icon matSuffix>qr_code</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="width-full">
+        <mat-label>Productnaam</mat-label>
+        <input formControlName="productNaam" matInput required />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="width-full">
+        <mat-label>Categorie</mat-label>
+        <mat-select formControlName="categorie">
+          <mat-option value="Zonneproducten">Zonneproducten</mat-option>
+          <mat-option value="Handverzorging">Handverzorging</mat-option>
+          <mat-option value="Voetverzorging">Voetverzorging</mat-option>
+          <mat-option value="Lichaamsverzorging">Lichaamsverzorging</mat-option>
+          <mat-option value="Gelaatverzorging">Gelaatverzorging</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="width-full">
+        <mat-label>Aantal</mat-label>
+        <input formControlName="aantal" matInput type="number" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="width-full">
+        <mat-label>Stukprijs</mat-label>
+        <input formControlName="stukprijs" matInput type="number" />
+        <span matTextPrefix>€&nbsp;</span>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="form.getRawValue()" [disabled]="form.invalid">
+    Toevoegen
+  </button>
+</mat-dialog-actions>

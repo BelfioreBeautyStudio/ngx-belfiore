@@ -1,40 +1,46 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class InventoryService {
-  private inventoryItems = [
-    {
-      barcode: "a1b2c3",
-      category: InventoryCategory.Gelaatverzorging,
-      productName: "Testproduct",
-      amountInStock: 5,
-      unitPrice: 9.99,
-    },
-  ];
+  private inventoryItems$ = new BehaviorSubject<InventoryItem[]>([]);
 
-  getInventoryItems = (): InventoryItem[] => {
-    return this.inventoryItems;
+  seedInventoryItems = () => {
+    this.inventoryItems$.next([
+      {
+        barcode: "a1b2c3",
+        categorie: InventoryCategory.Gelaatverzorging,
+        productNaam: "Testproduct",
+        aantal: 5,
+        stukprijs: 9.99,
+      },
+    ]);
+  };
+
+  getInventoryItems = (): BehaviorSubject<InventoryItem[]> => {
+    return this.inventoryItems$;
   };
 
   addInventoryItem = (item: InventoryItem) => {
-    this.inventoryItems.push(item);
+    // this.inventoryItems = [...this.inventoryItems, item];
+    this.inventoryItems$.next([...this.inventoryItems$.value, item]);
   };
 }
 
 export enum InventoryCategory {
-  Zonneproducten,
-  Handverzorging,
-  Voetverzorging,
-  Lichaamsverzorging,
-  Gelaatverzorging,
+  Zonneproducten = "Zonneproducten",
+  Handverzorging = "Handverzorging",
+  Voetverzorging = "Voetverzorging",
+  Lichaamsverzorging = "Lichaamsverzorging",
+  Gelaatverzorging = "Gelaatverzorging",
 }
 
 export interface InventoryItem {
   barcode: string;
-  category: InventoryCategory;
-  productName: string;
-  amountInStock: number;
-  unitPrice: number;
+  categorie: InventoryCategory;
+  productNaam: string;
+  aantal: number;
+  stukprijs: number;
 }

@@ -4,6 +4,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -21,4 +22,8 @@ body {
   position: absolute;
   bottom: 30px;
   right: 30px;
+}
+
+.width-full {
+  width: 100%;
 }
